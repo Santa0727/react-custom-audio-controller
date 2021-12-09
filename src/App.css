@@ -1,0 +1,64 @@
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.custom-audio-controller {
+  text-align: center;
+  padding: 20px 0;
+  width: 600px;
+  padding: 50px;
+}
+
+.bar {
+  user-select: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.bar .bar__time {
+  font-size: 16px;
+  font-family: "AcherusGrotesque";
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  line-height: 3.4;
+}
+
+.bar .bar__progress {
+  flex: 1;
+  border-radius: 5px;
+  margin: 0 20px;
+  height: 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.bar .bar__progress .bar__progress__knob {
+  position: relative;
+  height: 16px;
+  width: 16px;
+  border: 1.5px solid rgb(238, 210, 130);
+  border-radius: 50%;
+  background-color: rgb(238, 210, 130);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px 30px;
+}
+
+.control-item {
+  padding: 1px;
+  margin: 4px;
+  cursor: pointer;
+}
