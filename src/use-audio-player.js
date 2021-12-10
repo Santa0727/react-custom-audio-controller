@@ -7,7 +7,7 @@ function useAudioPlayer() {
   const [clickedTime, setClickedTime] = useState();
 
   useEffect(() => {
-    const audio = document.getElementById("custom-audio");
+    const audio = document.getElementById("custom-multi-audio");
 
     const setAudioData = () => {
       setDuration(audio.duration);

@@ -13,7 +13,12 @@
   width: 600px;
   padding: 50px;
 }
-
+.custom-multi-audio-controller {
+  text-align: center;
+  padding: 20px 0;
+  width: 600px;
+  padding: 50px;
+}
 .bar {
   user-select: none;
   width: 100%;
@@ -61,4 +66,21 @@
   padding: 1px;
   margin: 4px;
   cursor: pointer;
+}
+
+.custom-audio-label {
+  font-size: 32px;
+  font-family: "Baskerville";
+  color: rgb(0, 0, 0);
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+  margin: 5px 0px;
+}
+
+.custom-audio-title {
+  font-size: 16px;
+  font-family: "Baskerville";
+  color: rgb(0, 0, 0);
+  margin: 10px 0px;
 }

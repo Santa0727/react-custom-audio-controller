@@ -8,7 +8,7 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById("custom-audio-controller-app")
+  document.getElementById("custom-multi-audio-controller-app")
 );
 
 reportWebVitals();
