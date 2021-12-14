@@ -132,7 +132,7 @@ const CustomAudioController = () => {
 
   return (
     <div className="custom-audio-controller">
-      <audio id="custom-audio">
+      <audio id="custom-audio" autoPlay={true}>
         <source src={window.custom_audio_link} />
         Your browser does not support the <code>audio</code> element.
       </audio>

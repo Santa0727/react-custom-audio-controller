@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import playPng from "./play.png";
 import pausePng from "./pause.png";
 import moveLeftPng from "./move-left.png";
@@ -60,8 +60,9 @@ const StatusBar = ({ curTime, duration, onTimeUpdate, audioState }) => {
   );
 };
 
-const CustomAudioControllerC2 = ({ title, audio_url, clickPrev, clickNext, audioState }) => {
-  const { curTime, duration, setPlaying, setClickedTime } = useAudioPlayer();
+const CustomAudioControllerC2 = ({ title, audioId, clickPrev, clickNext }) => {
+  const [audioState, setAudioState] = useState(false);
+  const { curTime, duration, setPlaying, setClickedTime } = useAudioPlayer(audioId);
 
   const playClick = () => {
     if (!audioState) {
@@ -86,29 +87,43 @@ const CustomAudioControllerC2 = ({ title, audio_url, clickPrev, clickNext, audio
   };
 
   useEffect(() => {
-    setPlaying(false);
-  }, [audio_url, setPlaying]);
+    const audio = document.getElementById(audioId);
+    try {
+      if (audio && audio !== undefined) {
+        if (audio.duration > 0) audio.pause();
+        audio.onloadeddata = () => {
+          setAudioState(audio.networkState === 1 || audio.networkState === 2);
+        };
+        audio.load();
+        setAudioState(false);
+      } else {
+        setAudioState(false);
+      }
+    } catch (error) {
+      setAudioState(false);
+    }
+
+    return () => {
+      if (audio && audio !== undefined && audio.duration > 0) audio.pause();
+    };
+  }, [audioId]);
 
   return (
     <div className="custom-multi-audio-controller">
-      <audio id="custom-multi-audio">
-        <source src={audio_url} />
-        Your browser does not support the <code>audio</code> element.
-      </audio>
       <h3 className="custom-audio-label">Listen to the Podcast now!</h3>
       <h3 className="custom-audio-title">{title}</h3>
       <StatusBar curTime={curTime} duration={duration} onTimeUpdate={(t) => updateTime(t)} audioState={audioState} />
       <div className="multi-controls">
-        <div className="multi-control-item" onClick={clickPrev.bind(this)}>
+        <div className="multi-control-item" onClickCapture={clickPrev.bind(this)}>
           <img src={moveLeftPng} alt="move-left" />
         </div>
-        <div className="multi-control-item" onClick={playClick.bind(this)}>
+        <div className="multi-control-item" onClickCapture={playClick.bind(this)}>
           <img src={playPng} alt="play" />
         </div>
-        <div className="multi-control-item" onClick={pauseClick.bind(this)}>
+        <div className="multi-control-item" onClickCapture={pauseClick.bind(this)}>
           <img src={pausePng} alt="pause" />
         </div>
-        <div className="multi-control-item" onClick={clickNext.bind(this)}>
+        <div className="multi-control-item" onClickCapture={clickNext.bind(this)}>
           <img src={moveRightPng} alt="move-right" />
         </div>
       </div>

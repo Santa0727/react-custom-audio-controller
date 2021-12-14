@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./App.css";
+import "./index.css";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import CustomAudioController from "./custom-audio-controller";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CustomAudioController />
+    <App />
   </React.StrictMode>,
   document.getElementById("custom-multi-audio-controller-app")
 );
