@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import playPng from "./play.png";
 import pausePng from "./pause.png";
 import nextPlayPng from "./next-player.png";
@@ -7,7 +7,7 @@ import moveLeftPng from "./move-left.png";
 import moveRightPng from "./move-right.png";
 import togglePlayPng from "./toggle-play.png";
 import stopPng from "./stop.png";
-import useAudioPlayer from "./use-audio-player";
+import useAudioPlayer from "./use-single-audio-player";
 
 const controllerWidth = 600;
 
@@ -18,7 +18,7 @@ const formatDuration = (time) => {
   return date.toISOString().substring(14, 19);
 };
 
-const StatusBar = ({ curTime, duration, onTimeUpdate }) => {
+const StatusBar = ({ curTime, duration, onTimeUpdate, audioState }) => {
   const curPercentage = (curTime / duration) * 100;
 
   const calcClickedTime = (e) => {
@@ -32,6 +32,8 @@ const StatusBar = ({ curTime, duration, onTimeUpdate }) => {
     return timePerPixel * clickPositionInBar;
   };
   const handleTimeDrag = (e) => {
+    if (!audioState) return;
+
     onTimeUpdate(calcClickedTime(e));
 
     const updateTimeOnMove = (eMove) => {
@@ -51,7 +53,7 @@ const StatusBar = ({ curTime, duration, onTimeUpdate }) => {
       <div
         className="bar__progress"
         style={{
-          background: `linear-gradient(to right, rgb(204, 159, 82) ${curPercentage}%, black 0)`,
+          background: audioState ? `linear-gradient(to right, rgb(204, 159, 82) ${curPercentage}%, black 0)` : "darkgray",
         }}
         onMouseDown={(e) => handleTimeDrag(e)}
       >
@@ -63,27 +65,70 @@ const StatusBar = ({ curTime, duration, onTimeUpdate }) => {
 };
 
 const CustomAudioController = () => {
+  const [audioState, setAudioState] = useState(false);
   const { curTime, duration, playing, setPlaying, setClickedTime } = useAudioPlayer();
 
   const moveLeft = () => {
-    setClickedTime(Math.max(0.1, curTime - 10));
+    if (!audioState) {
+      window.alert("Audio is unavailable");
+    } else {
+      setClickedTime(Math.max(0.1, curTime - 10));
+    }
   };
   const moveRight = () => {
-    setClickedTime(Math.min(curTime + 10, duration));
+    if (!audioState) {
+      window.alert("Audio is unavailable");
+    } else {
+      setClickedTime(Math.min(curTime + 10, duration));
+    }
   };
   const playClick = () => {
-    setPlaying(true);
+    if (!audioState) {
+      window.alert("Audio is unavailable");
+    } else {
+      setPlaying(true);
+    }
   };
   const pauseClick = () => {
-    setPlaying(false);
+    if (!audioState) {
+      window.alert("Audio is unavailable");
+    } else {
+      setPlaying(false);
+    }
   };
   const stopClick = () => {
-    setClickedTime(0.1);
-    setPlaying(false);
+    if (!audioState) {
+      window.alert("Audio is unavailable");
+    } else {
+      setClickedTime(0.1);
+      setPlaying(false);
+    }
   };
   const toggleClick = () => {
-    setPlaying(!playing);
+    if (!audioState) {
+      window.alert("Audio is unavailable");
+    } else {
+      setPlaying(!playing);
+    }
   };
+
+  useEffect(() => {
+    try {
+      const audio = document.getElementById("custom-audio");
+      if (audio && audio !== undefined) {
+        if (audio.duration > 0) audio.pause();
+        audio.onloadeddata = () => {
+          setAudioState(audio.networkState === 1 || audio.networkState === 2);
+        };
+        audio.load();
+        setAudioState(false);
+      } else {
+        setAudioState(false);
+      }
+    } catch (error) {
+      setAudioState(false);
+    }
+  }, []);
 
   return (
     <div className="custom-audio-controller">
@@ -91,7 +136,7 @@ const CustomAudioController = () => {
         <source src={window.custom_audio_link} />
         Your browser does not support the <code>audio</code> element.
       </audio>
-      <StatusBar curTime={curTime} duration={duration} onTimeUpdate={(t) => setClickedTime(t)} />
+      <StatusBar curTime={curTime} duration={duration} onTimeUpdate={(t) => setClickedTime(t)} audioState={audioState} />
       <div className="controls">
         <div className="control-item" onClick={moveLeft.bind(this)}>
           <img src={moveLeftPng} alt="move-left" />

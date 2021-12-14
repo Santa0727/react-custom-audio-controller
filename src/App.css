@@ -1,42 +1,38 @@
 @keyframes App-logo-spin {
-  from {
+  0% {
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(1turn);
   }
 }
-
+#custom-audio-controller-app {
+  display: flex;
+  justify-content: center;
+}
 .custom-audio-controller {
   text-align: center;
-  padding: 20px 0;
-  width: 600px;
-  padding: 50px;
-}
-.custom-multi-audio-controller {
-  text-align: center;
-  padding: 20px 0;
   width: 600px;
   padding: 50px;
 }
 .bar {
+  -webkit-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   width: 100%;
   display: flex;
   align-items: center;
   position: relative;
 }
-
 .bar .bar__time {
   font-size: 16px;
-  font-family: "AcherusGrotesque";
-  color: rgb(0, 0, 0);
-  font-weight: bold;
+  font-family: "Acherus Grotesque";
+  color: #000;
+  font-weight: 700;
   line-height: 3.4;
 }
-
 .bar .bar__progress {
-  flex: 1;
+  flex: 1 1;
   border-radius: 5px;
   margin: 0 20px;
   height: 6px;
@@ -44,16 +40,14 @@
   align-items: center;
   cursor: pointer;
 }
-
 .bar .bar__progress .bar__progress__knob {
   position: relative;
   height: 16px;
   width: 16px;
-  border: 1.5px solid rgb(238, 210, 130);
+  border: 1.5px solid #eed282;
   border-radius: 50%;
-  background-color: rgb(238, 210, 130);
+  background-color: #eed282;
 }
-
 .controls {
   display: flex;
   align-items: center;
@@ -61,26 +55,16 @@
   margin: 10px;
   padding: 10px 30px;
 }
-
 .control-item {
   padding: 1px;
   margin: 4px;
   cursor: pointer;
 }
-
-.custom-audio-label {
-  font-size: 32px;
-  font-family: "Baskerville";
-  color: rgb(0, 0, 0);
-  font-style: italic;
-  line-height: 1.5;
-  text-align: center;
-  margin: 5px 0px;
+figure.wp-block-audio {
+  display: none;
 }
-
-.custom-audio-title {
-  font-size: 16px;
-  font-family: "Baskerville";
-  color: rgb(0, 0, 0);
-  margin: 10px 0px;
+@media (max-width: 480px) {
+  #custom-audio-controller-app .controls {
+    padding: 10px 0;
+  }
 }
