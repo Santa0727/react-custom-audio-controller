@@ -1,10 +1,87 @@
-body {
+#custom-multi-audio-controller-app body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
+#custom-multi-audio-controller-app code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+@keyframes App-logo-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+#custom-multi-audio-controller-app {
+  max-width: 503px;
+}
+#custom-multi-audio-controller-app .custom-audio-controller {
+  text-align: center;
+  width: 600px;
+  padding: 50px;
+}
+#custom-multi-audio-controller-app .multi-bar {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+#custom-multi-audio-controller-app .multi-bar .multi-bar__time {
+  font-size: 16px;
+  font-family: "Acherus Grotesque";
+  color: #000;
+  font-weight: 700;
+  line-height: 3.4;
+}
+#custom-multi-audio-controller-app .multi-bar .multi-bar__progress {
+  flex: 1 1;
+  border-radius: 5px;
+  margin: 0 20px;
+  height: 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+#custom-multi-audio-controller-app .multi-bar .multi-bar__progress .multi-bar__progress__knob {
+  position: relative;
+  height: 16px;
+  width: 16px;
+  border: 1.5px solid #eed282;
+  border-radius: 50%;
+  background-color: #eed282;
+}
+#custom-multi-audio-controller-app .multi-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px 30px;
+}
+#custom-multi-audio-controller-app .multi-control-item {
+  padding: 1px;
+  margin: 4px;
+  cursor: pointer;
+}
+#custom-multi-audio-controller-app .custom-audio-label {
+  font-size: 32px;
+  font-family: "Acherus Grotesque";
+  color: #000;
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+  margin: 5px 0;
+}
+#custom-multi-audio-controller-app .custom-audio-title {
+  font-size: 16px;
+  font-family: "Acherus Grotesque";
+  color: #000;
+  margin: 10px 0;
+  text-align: center;
+  font-weight: 700;
 }
